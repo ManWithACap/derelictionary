@@ -3,15 +3,11 @@
 ### *Your personal all-you-can-eat buffet of data!~*
 ---
 ## About
-**Derelictionary** is a Python script  run in a terminal. It functions as a database of information on things such as:
-> **Trading Posts**
-
-> **Outposts**
-
-> **Stargates**
-
-> **Galaxies**
-
+*Derelictionary* is a Python script  run in a terminal. It functions as a database of information on things such as:
+> **Trading Posts**<br>
+> **Outposts**<br>
+> **Stargates**<br>
+> **Galaxies**<br>
 > **Systems**
 
 Each of these info nodes can be searched through by a variety of methods and keywords. When data is found, it is reported to the user along with any other information about the object that was searched. I'll refer to it as an app from now on even though it's really just more of a script.
@@ -28,10 +24,8 @@ This app is developed by only myself with much love for the great game that is D
 ## Usage
 Since *Derelictionary* is a **command-based** application, you'll need to follow the prompts on screen like the ones below in order to use it correctly.
 There are **3** functions to *Derelicitonary* currently.
-> [x] **Read Data**
-
-> [] **Write Data**
-
+> [x] **Read Data**<br>
+> [] **Write Data**<br>
 > [] **Clear Data**
 
 ### Following The Prompts
@@ -42,3 +36,5 @@ There are **3** functions to *Derelicitonary* currently.
 For example, in image #1, you must enter in a number corresponding to the choices listed to you.
 If you choose a number, you will proceed onward into the program without problem (see images a & b).
 However, if your input is incorrect or isn't included in the choices, you'll be told to try again (seen in image c).
+
+## [GitHub Markdown Cheat Sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
