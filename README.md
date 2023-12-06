@@ -19,7 +19,7 @@ This app is developed by only myself with much love for the great game that is D
     2. If you downloaded the **.py** form, first, extract everything to it's own folder.
         1. Then, open up a terminal of your choice (CMD, PowerShell, GitBash, etc.)
         2. Navigate to the folder you extracted *Derelictionary* to (if you don't know how to, read up [here](https://tutorials.codebar.io/command-line/introduction/tutorial.html)).
-         1bc. Once in the correct directory, run it as a Python script by executing `python main.py` (keep in mind, you MUST have [Python](https://www.python.org/downloads/) installed on your machine).
+            1. Once in the correct directory, run it as a Python script by executing `python main.py` (keep in mind, you MUST have [Python](https://www.python.org/downloads/) installed on your machine).
 
 ## Usage
 Since *Derelictionary* is a **command-based** application, you'll need to follow the prompts on screen like the ones below in order to use it correctly.
