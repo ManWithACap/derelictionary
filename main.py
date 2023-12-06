@@ -1,7 +1,7 @@
 import derelictionary
 from colors import Colors
 
-# print out a nice and pretty little title card
+# print out a nice and pretty itty bitty super duper tiny title card that is definitely not absolutely gigantic
 print(f"""{Colors.B}{Colors.CYAN}
     ╔════════════════════════════════════════════════════════════════════════════════════╗
     ║{Colors.RED}     ____{Colors.YELLOW}                     {Colors.MAGENTA}__ {Colors.PURPLE}_        {Colors.YELLOW}__   {Colors.GREEN}_                                    {Colors.CYAN}║
