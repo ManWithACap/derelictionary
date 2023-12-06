@@ -42,6 +42,3 @@ There are **3** functions to *Derelicitonary* currently.
 For example, in image #1, you must enter in a number corresponding to the choices listed to you.
 If you choose a number, you will proceed onward into the program without problem (see images a & b).
 However, if your input is incorrect or isn't included in the choices, you'll be told to try again (seen in image c).
-
-## Operation
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
