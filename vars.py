@@ -1,0 +1,4 @@
+outposts = []
+stargates = []
+tradingPosts = []
+systems = []
