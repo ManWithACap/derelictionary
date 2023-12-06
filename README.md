@@ -18,12 +18,12 @@ Each of these info nodes can be searched through by a variety of methods and key
 This app is developed by only myself with much love for the great game that is Duskers. Down below I'll explain further on how to use the program and provide screenshots of what it looks like. If you would like to help in creating this app, I'd love to put you on the team! Shoot me a message either here or on Discord @ aamorphous.
 
 ## Installation
-### 1. Go to the [releases](https://github.com/ManWithACap/derelictionary/releases) page and choose which type of download you'd like.
-###     1a. If you downloaded the **.exe** form, simply extract it into a folder and then double click on "derelictionary.exe" to run the app.
-###     1b. If you downloaded the **.py** form, first, extract everything to it's own folder.
-###         1ba. Then, open up a terminal of your choice (CMD, PowerShell, GitBash, etc.)
-###         1bb. Navigate to the folder you extracted *Derelictionary* to (if you don't know how to, read up [here](https://tutorials.codebar.io/command-line/introduction/tutorial.html)).
-###         1bc. Once in the correct directory, run it as a Python script by executing `python main.py` (keep in mind, you MUST have [Python](https://www.python.org/downloads/) installed on your machine).
+ 1. Go to the [releases](https://github.com/ManWithACap/derelictionary/releases) page and choose which type of download you'd like.
+    1. If you downloaded the **.exe** form, simply extract it into a folder and then double click on "derelictionary.exe" to run the app.
+    2. If you downloaded the **.py** form, first, extract everything to it's own folder.
+        1. Then, open up a terminal of your choice (CMD, PowerShell, GitBash, etc.)
+        2. Navigate to the folder you extracted *Derelictionary* to (if you don't know how to, read up [here](https://tutorials.codebar.io/command-line/introduction/tutorial.html)).
+         1bc. Once in the correct directory, run it as a Python script by executing `python main.py` (keep in mind, you MUST have [Python](https://www.python.org/downloads/) installed on your machine).
 
 ## Usage
 Since *Derelictionary* is a **command-based** application, you'll need to follow the prompts on screen like the ones below in order to use it correctly.
