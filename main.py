@@ -1,20 +1,25 @@
 import derelictionary
 from colors import Colors
+import ctypes
+
+# set console mode to make sure the escape sequences are processed correctly
+kernel32 = ctypes.windll.kernel32
+kernel32.SetConsoleMode(kernel32.GetStdHandle(-11), 7)
 
 # print out a nice and pretty itty bitty super duper tiny title card that is definitely not absolutely gigantic
 print(f"""{Colors.B}{Colors.CYAN}
     ╔════════════════════════════════════════════════════════════════════════════════════╗
     ║{Colors.RED}     ____{Colors.YELLOW}                     {Colors.MAGENTA}__ {Colors.PURPLE}_        {Colors.YELLOW}__   {Colors.GREEN}_                                    {Colors.CYAN}║
-    ║{Colors.RED}    / __ \{Colors.YELLOW} ___{Colors.GREEN}   _____{Colors.BLUE} ___{Colors.MAGENTA}   / /{Colors.PURPLE}(_){Colors.RED}_____{Colors.YELLOW} / /_{Colors.GREEN} (_){Colors.BLUE}____{Colors.MAGENTA}   ____{Colors.PURPLE}   ____ _{Colors.RED} _____{Colors.YELLOW} __  __  {Colors.CYAN}║
-    ║{Colors.RED}   / / / /{Colors.YELLOW}/ _ \{Colors.GREEN} / ___/{Colors.BLUE}/ _ \{Colors.MAGENTA} / /{Colors.PURPLE}/ /{Colors.RED}/ ___/{Colors.YELLOW}/ __/{Colors.GREEN}/ /{Colors.BLUE}/ __ \{Colors.MAGENTA} / __ \{Colors.PURPLE} / __ `/{Colors.RED}/ ___/{Colors.YELLOW}/ / / /  {Colors.CYAN}║
+    ║{Colors.RED}    / __ \\{Colors.YELLOW} ___{Colors.GREEN}   _____{Colors.BLUE} ___{Colors.MAGENTA}   / /{Colors.PURPLE}(_){Colors.RED}_____{Colors.YELLOW} / /_{Colors.GREEN} (_){Colors.BLUE}____{Colors.MAGENTA}   ____{Colors.PURPLE}   ____ _{Colors.RED} _____{Colors.YELLOW} __  __  {Colors.CYAN}║
+    ║{Colors.RED}   / / / /{Colors.YELLOW}/ _ \\{Colors.GREEN} / ___/{Colors.BLUE}/ _ \\{Colors.MAGENTA} / /{Colors.PURPLE}/ /{Colors.RED}/ ___/{Colors.YELLOW}/ __/{Colors.GREEN}/ /{Colors.BLUE}/ __ \\{Colors.MAGENTA} / __ \\{Colors.PURPLE} / __ `/{Colors.RED}/ ___/{Colors.YELLOW}/ / / /  {Colors.CYAN}║
     ║{Colors.RED}  / /_/ /{Colors.YELLOW}/  __/{Colors.GREEN}/ /{Colors.BLUE}   /  __/{Colors.MAGENTA}/ /{Colors.PURPLE}/ /{Colors.RED}/ /__{Colors.YELLOW} / /_{Colors.GREEN} / /{Colors.BLUE}/ /_/ /{Colors.MAGENTA}/ / / /{Colors.PURPLE}/ /_/ /{Colors.RED}/ /{Colors.YELLOW}   / /_/ /   {Colors.CYAN}║
-    ║{Colors.RED} /_____/{Colors.YELLOW} \___/{Colors.GREEN}/_/{Colors.BLUE}    \___/{Colors.MAGENTA}/_/{Colors.PURPLE}/_/{Colors.RED} \___/{Colors.YELLOW} \__/{Colors.GREEN}/_/{Colors.BLUE} \____/{Colors.MAGENTA}/_/ /_/{Colors.PURPLE} \__,_/{Colors.RED}/_/{Colors.YELLOW}    \__, /    {Colors.CYAN}║
+    ║{Colors.RED} /_____/{Colors.YELLOW} \\___/{Colors.GREEN}/_/{Colors.BLUE}    \\___/{Colors.MAGENTA}/_/{Colors.PURPLE}/_/{Colors.RED} \\___/{Colors.YELLOW} \\__/{Colors.GREEN}/_/{Colors.BLUE} \\____/{Colors.MAGENTA}/_/ /_/{Colors.PURPLE} \\__,_/{Colors.RED}/_/{Colors.YELLOW}    \\__, /    {Colors.CYAN}║
     ║{Colors.WHITE}                                                                         {Colors.YELLOW}/____/     {Colors.CYAN}║
     ║{Colors.WHITE}                                     {Colors.YELLOW}___   ____                                     {Colors.CYAN}║
     ║{Colors.WHITE}                              _   __{Colors.YELLOW}<  /  / __ \\                                    {Colors.CYAN}║
     ║{Colors.WHITE}                             | | / /{Colors.YELLOW}/ /  / / / /                                    {Colors.CYAN}║
     ║{Colors.WHITE}                             | |/ /{Colors.YELLOW}/ /{Colors.WHITE}_ {Colors.YELLOW}/ /_/ /                                     {Colors.CYAN}║
-    ║{Colors.WHITE}                             |___/{Colors.YELLOW}/_/{Colors.WHITE}(_){Colors.YELLOW}\____/                                      {Colors.CYAN}║
+    ║{Colors.WHITE}                             |___/{Colors.YELLOW}/_/{Colors.WHITE}(_){Colors.YELLOW}\\____/                                      {Colors.CYAN}║
     ╚════════════════════════════════════════════════════════════════════════════════════╝
     {Colors.BOFF}""")
 

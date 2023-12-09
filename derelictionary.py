@@ -30,7 +30,7 @@ def runSearch(category, method, mode="r"):
         foundSomething = True
 
         # colors! :D
-        print(Colors.CYAN + Colors.U)
+        print(f"\n{Colors.B}{Colors.U}{Colors.CYAN}FOUND:{Colors.RESET}")
         
         # using the mthd parameter variable, decide which method to use when searching
         match mthd:
@@ -38,9 +38,6 @@ def runSearch(category, method, mode="r"):
 
                 # setup secondary toggle variable
                 matchFound = False
-
-                # print start
-                print(f"FOUND:‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ {Colors.UOFF}")
                 
                 # perform the search
                 for entry in dataList:
@@ -88,9 +85,6 @@ def runSearch(category, method, mode="r"):
 
                 # setup secondary toggle variable
                 matchFound = False
-
-                # print start
-                print(f"FOUND:‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ {Colors.UOFF}")
                 
                 # perform search
                 for entry in dataList:
@@ -138,9 +132,6 @@ def runSearch(category, method, mode="r"):
 
                 # setup secondary toggle variable
                 matchFound = False
-
-                # print start
-                print(f"FOUND:‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ {Colors.UOFF}")
                 
                 # perform search
                 for entry in dataList:
@@ -163,9 +154,6 @@ def runSearch(category, method, mode="r"):
 
                 # setup secondary toggle variable
                 matchFound = False
-
-                # print start
-                print(f"FOUND:‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ {Colors.UOFF}")
                 
                 # perform search
                 for entry in dataList:
@@ -206,9 +194,6 @@ def runSearch(category, method, mode="r"):
 
                 # setup secondary toggle variable
                 matchFound = False
-
-                # print start
-                print(f"FOUND:‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ {Colors.UOFF}")
                 
                 # perform search
                 for entry in dataList:
@@ -231,9 +216,6 @@ def runSearch(category, method, mode="r"):
 
                 # setup secondary toggle variable
                 matchFound = False
-
-                # print start
-                print(f"FOUND:‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ {Colors.UOFF}")
                 
                 # perform search
                 for entry in dataList:
@@ -374,6 +356,7 @@ def runSearch(category, method, mode="r"):
                     foundSomething = True
                 else:
                     foundSomething = False
+        
         if not foundSomething:
             print(f"{Colors.BLACK}{Colors.REDB}!! NONE !!{Colors.RESET}")
     
