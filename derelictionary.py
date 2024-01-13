@@ -239,8 +239,8 @@ def runSearch(category, method, mode="r"):
 
             print(f"{Colors.BLACK}{Colors.REDB}!! NONE !!{Colors.RESET}")
     
-    # currently this is only just copy & pasted code from "rData" because the code for searching data will probably be used again
-    def wData(dataList, mthd, qry):
+    # used to write data to the "database"
+    def wData(dataList, mthd, qry, file):
         """
         A nested function responsible for actually searching out data and reporting it back to the user
 
@@ -249,116 +249,25 @@ def runSearch(category, method, mode="r"):
         - mthd (string): the method in which to search in dataList
         - qry (string): the string value to be searched
         """
-
-        foundSomething = True
-        print(Colors.CYAN + Colors.U)
-        match mthd:
-            case "g":
-                matchFound = False
-                print(f"FOUND:_______________{Colors.UOFF}")
-                for entry in dataList:
-                    try:
-                        if qry.lower() == entry['galaxy'].lower():
-                            try:
-                                print(f"{Colors.YELLOW}{Colors.B}{entry['name']}{Colors.RESET} - {entry['system']}, {Colors.GREEN}{Colors.B}{entry['type'].upper()}{Colors.RESET}.")
-                                matchFound = True
-                            except KeyError:
-                                if category == "STARGATES":
-                                    print(f"{Colors.YELLOW}{Colors.B}{entry['id']}{Colors.RESET} - {entry['system']}, {Colors.YELLOW}OS:{Colors.RESET} {entry['output']['system']}, {Colors.YELLOW}OG:{Colors.RESET} {entry['output']['galaxy']}.")
-                                    matchFound = True
-                                else:
-                                    print(f"{Colors.YELLOW}{Colors.B}{entry['id']}{Colors.RESET} - {entry['system']}")
-                                    matchFound = True
-                    except KeyError:
-                        if qry.lower() == entry['name'].lower():
-                            for system in entry['systems']:
-                                print(f"{Colors.YELLOW}{Colors.B}{system}{Colors.RESET}")
-                                matchFound = True
-                if matchFound:
-                    foundSomething = True
-                else:
-                    foundSomething = False
-            case "s":
-                matchFound = False
-                print(f"FOUND:_______________{Colors.UOFF}")
-                for entry in dataList:
-                    try:
-                        if qry.lower() == entry['system'].lower():
-                            try:
-                                print(f"{Colors.YELLOW}{Colors.B}{entry['name']}{Colors.RESET} - {entry['galaxy']}, {Colors.GREEN}{Colors.B}{entry['type'].upper()}{Colors.RESET}.")
-                                matchFound = True
-                            except KeyError:
-                                if category == "STARGATES":
-                                    print(f"{Colors.YELLOW}{Colors.B}{entry['id']}{Colors.RESET} - {entry['galaxy']}, {Colors.YELLOW}OS:{Colors.RESET} {entry['output']['system']}, {Colors.YELLOW}OG:{Colors.RESET} {entry['output']['galaxy']}.")
-                                    matchFound = True
-                                else:
-                                    print(f"{Colors.YELLOW}{Colors.B}{entry['id']}{Colors.RESET} - {entry['galaxy']}")
-                                    matchFound = True
-                    except KeyError:
-                        for system in entry['systems']:
-                            if qry.lower() == system.lower():
-                                print(f"{Colors.YELLOW}{Colors.B}{entry['name']}{Colors.RESET}")
-                                matchFound = True
-                if matchFound:
-                    foundSomething = True
-                else:
-                    foundSomething = False
-            case "t":
-                matchFound = False
-                print(f"FOUND:_______________{Colors.UOFF}")
-                for entry in dataList:
-                    if qry.lower() == entry['type']:
-                        print(f"{Colors.YELLOW}{Colors.B}{entry['name']}{Colors.RESET} - {entry['system']}, {entry['galaxy']}.")
-                        matchFound = True
-                if matchFound:
-                    foundSomething = True
-                else:
-                    foundSomething = False
-            case "lp":
-                matchFound = False
-                print(f"FOUND:_______________{Colors.UOFF}")
-                for entry in dataList:
-                    if category == "SYSTEMS":
-                        for system in entry['systems']:
-                            if qry.lower() in system.lower():
-                                print(f"{Colors.YELLOW}{Colors.B}{system}{Colors.RESET} - {entry['name']}")
-                                matchFound = True
-                    elif category == "OUTPOSTS":
-                        if qry.lower() in entry['name'].lower():
-                            print(f"{Colors.YELLOW}{Colors.B}{entry['name']}{Colors.RESET} - {entry['system']}, {entry['galaxy']}, {Colors.GREEN}{Colors.B}{entry['type'].upper()}{Colors.RESET}.")
-                            matchFound = True
-                    else:
-                        if qry.lower() in entry['name'].lower():
-                            print(f"{Colors.YELLOW}{Colors.B}{entry['name']}{Colors.RESET}")
-                            matchFound = True
-                if matchFound:
-                    foundSomething = True
-                else:
-                    foundSomething = False
-            case "os":
-                matchFound = False
-                print(f"FOUND:_______________{Colors.UOFF}")
-                for entry in dataList:
-                    if qry.lower() == entry['output']['system'].lower():
-                        print(f"{Colors.YELLOW}{Colors.B}{entry['id']}{Colors.RESET} - {entry['system']}, {entry['galaxy']}, {Colors.YELLOW}OG:{Colors.RESET} {entry['output']['galaxy']}")
-                        matchFound = True
-                if matchFound:
-                    foundSomething = True
-                else:
-                    foundSomething = False
-            case "og":
-                print(f"FOUND:_______________{Colors.UOFF}")
-                for entry in dataList:
-                    if qry.lower() == entry['output']['galaxy'].lower():
-                        print(f"{Colors.YELLOW}{Colors.B}{entry['id']}{Colors.RESET} - {entry['system']}, {entry['galaxy']}, {Colors.YELLOW}OS:{Colors.RESET} {entry['output']['system']}")
-                        matchFound = True
-                if matchFound:
-                    foundSomething = True
-                else:
-                    foundSomething = False
+        # colors! :D
+        print(f"\n{Colors.B}{Colors.U}{Colors.CYAN}FOUND:{Colors.RESET}")
         
-        if not foundSomething:
-            print(f"{Colors.BLACK}{Colors.REDB}!! NONE !!{Colors.RESET}")
+        # using the mthd variable, use the correct process to write in data
+        match mthd:
+            case "o":
+                pass
+
+            case "g":
+                pass
+
+            case "t":
+                pass
+
+            case "s":
+                pass
+
+            case "x":
+                pass
     
     # currently this is only just copy & pasted code from "rData" because the code for searching data will probably be used again
     def cData(dataList, mthd, qry):
@@ -483,9 +392,55 @@ def runSearch(category, method, mode="r"):
     # when the function is called, check what the mode is, then run the match-case statement for it's corresponding function
     # WRITING MODE 
     if mode == "w":
-        
-        # function not implemented yet
-        print(f"\n{Colors.BLACK}{Colors.REDB}!!* FUNCTION NOT IMPLETMENTED YET. *!!{Colors.RESET}")
+
+        # ask for query to search for
+        query = input(f"\n{Colors.YELLOW}{Colors.B}Input Query{Colors.RESET}: ")
+
+        # pass a different corresponding data list variable depending on the category chosen
+        # fyi: vars.systems is used for both the "GALAXIES" category case AND the "SYSTEMS" category case
+        # because BOTH desired search return data choices are found in the same file and therefore in the same data list
+        match category:
+            case "OUTPOSTS":
+                theFile = open("./data/outposts.txt", "w")
+                wData(vars.outposts, method, query, theFile)
+                theFile.close()
+
+            case "STARGATES":
+                theFile = open("./data/stargates.txt", "w")
+                wData(vars.stargates, method, query, theFile)
+                theFile.close()
+
+            case "TRADING POSTS":
+                theFile = open("./data/trading_posts.txt", "w")
+                wData(vars.tradingPosts, method, query, theFile)
+                theFile.close()
+
+            case "GALAXIES":
+                theFile = open("./data/systems.txt", "w")
+                wData(vars.systems, method, query, theFile)
+                theFile.close()
+
+            case "SYSTEMS":
+                theFile = open("./data/systems.txt", "w")
+                wData(vars.systems, method, query, theFile)
+                theFile.close()
+
+
+        # after the function decided above is finished executing, ask if the user wishes to query another value
+        while True:
+            
+            qagain = input(f"{Colors.CYAN}{Colors.B}Would you like to query again? (y / n){Colors.RESET}: ")
+            
+            # if yes, run the search again with the same parameters and break the loop
+            # if no, just break the loop
+            # if the value is invalid, let the user know and go again
+            if qagain == "y":
+                runSearch(category, method, mode)
+                break
+            elif qagain == "n":
+                break
+            else:
+                print(f"{Colors.BLACK}{Colors.REDB}\n!- INVALID CHOICE. PLEASE TRY AGAIN. -!{Colors.RESET}\n")
 
     # READING MODE
     elif mode == "r":
@@ -545,82 +500,124 @@ def rwcData(mode="r"):
     - mode (string): "r" read, "w" write, "c" clear; defaulted to "r" for read
     """
 
-    # ask the user what they would like to search for
+    # ask the user what they would like to search/write/clear
     while True:
         
-        # ask user what to search for
-        choice2 = input(f"{Colors.RED}\n(O)utposts{Colors.WHITE}, {Colors.YELLOW}Star(g)ates{Colors.WHITE}, {Colors.GREEN}(T)rading Posts{Colors.WHITE}, {Colors.BLUE}Gala(x)ies{Colors.WHITE}, or {Colors.PURPLE}(S)ystems{Colors.WHITE}?: ")
-        
-        # if the value is "exit", break the loop and go back to the main menu
-        if choice2 == "exit":
-            break
+        # read mode
+        if mode == "r":
+            
+            # ask user what to search for
+            choice2 = input(f"{Colors.RED}\n(O)utposts{Colors.WHITE}, {Colors.YELLOW}Star(g)ates{Colors.WHITE}, {Colors.GREEN}(T)rading Posts{Colors.WHITE}, {Colors.BLUE}Gala(x)ies{Colors.WHITE}, or {Colors.PURPLE}(S)ystems{Colors.WHITE}?: ")
 
-        # if the value is one of the valid values, proceed and call runSearch
-        elif choice2 in ["o", "g", "t", "s", "x"]:
-            match choice2:
-                case "o":
-                    print(Colors.CYAN)
-                    group = "OUTPOSTS"
-                    print(f"\nYou have chosen to search for {Colors.RESET}{Colors.B}{group}{Colors.BOFF}{Colors.CYAN}.")
-                    while True:
-                        choice = input(f"{Colors.CYAN}Search by {Colors.RED}(g)alaxy name{Colors.CYAN}, {Colors.YELLOW}(s)ystem name{Colors.CYAN}, {Colors.GREEN}letter or phrase in name (lp){Colors.CYAN}?: {Colors.RESET}")
-                        if choice not in ["g", "s", "t", "lp"]:
-                            print(f"{Colors.BLACK}{Colors.REDB}\n!- INVALID CHOICE. PLEASE TRY AGAIN. -!{Colors.RESET}\n")
-                        else:
-                            runSearch(group, choice, mode)
-                            break
+            # if the value is "exit", break the loop and go back to the main menu
+            if choice2 == "exit":
+                break
 
-                case "g":
-                    print(Colors.CYAN)
-                    group = "STARGATES"
-                    print(f"\nYou have chosen to search for {Colors.RESET}{Colors.B}{group}{Colors.BOFF}{Colors.CYAN}.")
-                    while True:
-                        choice = input(f"{Colors.CYAN}Search by {Colors.RED}(g)alaxy name{Colors.CYAN}, {Colors.YELLOW}(s)ystem name{Colors.CYAN},{Colors.PURPLE}\noutput system (os){Colors.CYAN}, or {Colors.MAGENTA}output galaxy (og){Colors.CYAN}?: {Colors.RESET}")
-                        if choice not in ["g", "s", "i", "os", "og"]:
-                            print(f"{Colors.BLACK}{Colors.REDB}\n!- INVALID CHOICE. PLEASE TRY AGAIN. -!{Colors.RESET}\n")
-                        else:
-                            runSearch(group, choice, mode)
-                            break
+            # if the value is one of the valid values, proceed and call runSearch
+            elif choice2 in ["o", "g", "t", "s", "x"]:
+                match choice2:
+                    case "o":
+                        print(Colors.CYAN)
+                        group = "OUTPOSTS"
+                        print(f"\nYou have chosen to search for {Colors.RESET}{Colors.B}{group}{Colors.BOFF}{Colors.CYAN}.")
+                        while True:
+                            choice = input(f"{Colors.CYAN}Search by {Colors.RED}(g)alaxy name{Colors.CYAN}, {Colors.YELLOW}(s)ystem name{Colors.CYAN}, {Colors.GREEN}letter or phrase in name (lp){Colors.CYAN}?: {Colors.RESET}")
+                            if choice not in ["g", "s", "t", "lp"]:
+                                print(f"{Colors.BLACK}{Colors.REDB}\n!- INVALID CHOICE. PLEASE TRY AGAIN. -!{Colors.RESET}\n")
+                            else:
+                                runSearch(group, choice, mode)
+                                break
 
-                case "t":
-                    print(Colors.CYAN)
-                    group = "TRADING POSTS"
-                    print(f"\nYou have chosen to search for {Colors.RESET}{Colors.B}{group}{Colors.BOFF}{Colors.CYAN}.")
-                    while True:
-                        choice = input(f"{Colors.CYAN}Search by {Colors.RED}(g)alaxy name{Colors.CYAN}, {Colors.YELLOW}(s)ystem name{Colors.CYAN}: {Colors.RESET}")
-                        if choice not in ["g", "s"]:
-                            print(f"{Colors.BLACK}{Colors.REDB}\n!- INVALID CHOICE. PLEASE TRY AGAIN. -!{Colors.RESET}\n")
-                        else:
-                            runSearch(group, choice, mode)
-                            break
+                    case "g":
+                        print(Colors.CYAN)
+                        group = "STARGATES"
+                        print(f"\nYou have chosen to search for {Colors.RESET}{Colors.B}{group}{Colors.BOFF}{Colors.CYAN}.")
+                        while True:
+                            choice = input(f"{Colors.CYAN}Search by {Colors.RED}(g)alaxy name{Colors.CYAN}, {Colors.YELLOW}(s)ystem name{Colors.CYAN},{Colors.PURPLE}\noutput system (os){Colors.CYAN}, or {Colors.MAGENTA}output galaxy (og){Colors.CYAN}?: {Colors.RESET}")
+                            if choice not in ["g", "s", "i", "os", "og"]:
+                                print(f"{Colors.BLACK}{Colors.REDB}\n!- INVALID CHOICE. PLEASE TRY AGAIN. -!{Colors.RESET}\n")
+                            else:
+                                runSearch(group, choice, mode)
+                                break
 
-                case "s":
-                    print(Colors.CYAN)
-                    group = "SYSTEMS"
-                    print(f"\nYou have chosen to search for {Colors.RESET}{Colors.B}{group}{Colors.BOFF}{Colors.CYAN}.")
-                    while True:
-                        choice = input(f"{Colors.CYAN}Search by {Colors.RED}(g)alaxy name{Colors.CYAN}, {Colors.YELLOW}letter or phrase in name (lp){Colors.CYAN}?: {Colors.RESET}")
-                        if choice not in ["g", "lp"]:
-                            print(f"{Colors.BLACK}{Colors.REDB}\n!- INVALID CHOICE. PLEASE TRY AGAIN. -!{Colors.RESET}\n")
-                        else:
-                            runSearch(group, choice, mode)
-                            break
+                    case "t":
+                        print(Colors.CYAN)
+                        group = "TRADING POSTS"
+                        print(f"\nYou have chosen to search for {Colors.RESET}{Colors.B}{group}{Colors.BOFF}{Colors.CYAN}.")
+                        while True:
+                            choice = input(f"{Colors.CYAN}Search by {Colors.RED}(g)alaxy name{Colors.CYAN}, {Colors.YELLOW}(s)ystem name{Colors.CYAN}: {Colors.RESET}")
+                            if choice not in ["g", "s"]:
+                                print(f"{Colors.BLACK}{Colors.REDB}\n!- INVALID CHOICE. PLEASE TRY AGAIN. -!{Colors.RESET}\n")
+                            else:
+                                runSearch(group, choice, mode)
+                                break
 
-                case "x":
-                    print(Colors.CYAN)
-                    group = "GALAXIES"
-                    print(f"\nYou have chosen to search for {Colors.RESET}{Colors.B}{group}{Colors.BOFF}{Colors.CYAN}.")
-                    while True:
-                        choice = input(f"{Colors.CYAN}Search by {Colors.YELLOW}(s)ystem name{Colors.CYAN}, {Colors.GREEN}letter or phrase in name (lp){Colors.CYAN}?: {Colors.RESET}")
-                        if choice not in ["s", "lp"]:
-                            print(f"{Colors.BLACK}{Colors.REDB}\n!- INVALID CHOICE. PLEASE TRY AGAIN. -!{Colors.RESET}\n")
-                        else:
-                            runSearch(group, choice, mode)
-                            break
-        
-        # if the value is invalid and not one of the options, tell the user that and go again
-        else:
-            print(f"{Colors.BLACK}{Colors.REDB}\n!- INVALID CHOICE. PLEASE TRY AGAIN. -!{Colors.RESET}\n")
+                    case "s":
+                        print(Colors.CYAN)
+                        group = "SYSTEMS"
+                        print(f"\nYou have chosen to search for {Colors.RESET}{Colors.B}{group}{Colors.BOFF}{Colors.CYAN}.")
+                        while True:
+                            choice = input(f"{Colors.CYAN}Search by {Colors.RED}(g)alaxy name{Colors.CYAN}, {Colors.YELLOW}letter or phrase in name (lp){Colors.CYAN}?: {Colors.RESET}")
+                            if choice not in ["g", "lp"]:
+                                print(f"{Colors.BLACK}{Colors.REDB}\n!- INVALID CHOICE. PLEASE TRY AGAIN. -!{Colors.RESET}\n")
+                            else:
+                                runSearch(group, choice, mode)
+                                break
+
+                    case "x":
+                        print(Colors.CYAN)
+                        group = "GALAXIES"
+                        print(f"\nYou have chosen to search for {Colors.RESET}{Colors.B}{group}{Colors.BOFF}{Colors.CYAN}.")
+                        while True:
+                            choice = input(f"{Colors.CYAN}Search by {Colors.YELLOW}(s)ystem name{Colors.CYAN}, {Colors.GREEN}letter or phrase in name (lp){Colors.CYAN}?: {Colors.RESET}")
+                            if choice not in ["s", "lp"]:
+                                print(f"{Colors.BLACK}{Colors.REDB}\n!- INVALID CHOICE. PLEASE TRY AGAIN. -!{Colors.RESET}\n")
+                            else:
+                                runSearch(group, choice, mode)
+                                break
+                            
+            # if the value is invalid and not one of the options, tell the user that and go again
+            else:
+                print(f"{Colors.BLACK}{Colors.REDB}\n!- INVALID CHOICE. PLEASE TRY AGAIN. -!{Colors.RESET}\n")
+
+        elif mode == "w":
+
+            # ask user what to write for
+            choice2 = input(f"{Colors.RED}\n(O)utposts{Colors.WHITE}, {Colors.YELLOW}Star(g)ates{Colors.WHITE}, {Colors.GREEN}(T)rading Posts{Colors.WHITE}, {Colors.BLUE}Gala(x)ies{Colors.WHITE}, or {Colors.PURPLE}(S)ystems{Colors.WHITE}?: ")
+
+            # if the value is "exit", break the loop and go back to the main menu
+            if choice2 == "exit":
+                break
+
+            # if the value is one of the valid values, proceed and call runSearch
+            elif choice2 in ["o", "g", "t", "s", "x"]:
+                match choice2:
+                    case "o":
+                        group = "OUTPOSTS"
+                        runSearch(group, choice2, mode)
+
+                    case "g":
+                        group = "STARGATES"
+                        runSearch(group, choice2, mode)
+
+                    case "t":
+                        group = "TRADING POSTS"
+                        runSearch(group, choice2, mode)
+
+                    case "s":
+                        group = "SYSTEMS"
+                        runSearch(group, choice2, mode)
+
+                    case "x":
+                        group = "GALAXIES"
+                        runSearch(group, choice2, mode)
+
+            # if the value is invalid and not one of the options, tell the user that and go again
+            else:
+                print(f"{Colors.BLACK}{Colors.REDB}\n!- INVALID CHOICE. PLEASE TRY AGAIN. -!{Colors.RESET}\n")
+
+        elif mode == "c":
+            pass
 
 def update():
     """
