@@ -240,7 +240,7 @@ def runSearch(category, method, mode="r"):
             print(f"{Colors.BLACK}{Colors.REDB}!! NONE !!{Colors.RESET}")
     
     # used to write data to the "database"
-    def wData(dataList, mthd, qry, file):
+    def wData(dataList, mthd, qry):
         """
         A nested function responsible for actually searching out data and reporting it back to the user
 
@@ -254,8 +254,27 @@ def runSearch(category, method, mode="r"):
         
         # using the mthd variable, use the correct process to write in data
         match mthd:
+            
             case "o":
-                pass
+
+                lastIndexOf = 0
+                content = ""
+
+                with open("./data/outposts.txt", "r") as rfile:
+                    
+                    content = rfile.read()
+
+                    for i in range(len(content) - 1, -1, -1):
+
+                        if content[i] == "}":
+                            lastIndexOf = i+1
+                            print(f"{i}, '{content[len(content)-1]}'")
+                            break
+                    rfile.close()
+
+                with open("./data/outposts.txt", "w") as wfile:
+                    wfile.write(content[:lastIndexOf] + ",\n    blahblahblah" + content[lastIndexOf:])
+                    wfile.close()
 
             case "g":
                 pass
@@ -401,29 +420,19 @@ def runSearch(category, method, mode="r"):
         # because BOTH desired search return data choices are found in the same file and therefore in the same data list
         match category:
             case "OUTPOSTS":
-                theFile = open("./data/outposts.txt", "w")
-                wData(vars.outposts, method, query, theFile)
-                theFile.close()
+                wData(vars.outposts, method, query)
 
             case "STARGATES":
-                theFile = open("./data/stargates.txt", "w")
-                wData(vars.stargates, method, query, theFile)
-                theFile.close()
+                wData(vars.stargates, method, query)
 
             case "TRADING POSTS":
-                theFile = open("./data/trading_posts.txt", "w")
-                wData(vars.tradingPosts, method, query, theFile)
-                theFile.close()
+                wData(vars.tradingPosts, method, query)
 
             case "GALAXIES":
-                theFile = open("./data/systems.txt", "w")
-                wData(vars.systems, method, query, theFile)
-                theFile.close()
+                wData(vars.systems, method, query)
 
             case "SYSTEMS":
-                theFile = open("./data/systems.txt", "w")
-                wData(vars.systems, method, query, theFile)
-                theFile.close()
+                wData(vars.systems, method, query)
 
 
         # after the function decided above is finished executing, ask if the user wishes to query another value
