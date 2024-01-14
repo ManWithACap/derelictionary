@@ -434,10 +434,209 @@ def runSearch(category, method, mode="r"):
                 update()
 
             case "s":
-                pass
+                
+                
+                # local variables
+                lastIndexOf = 0
+                content = ""
+                firstEntry = False
+
+                # read the current data from the file and determine if this is the first entry or not
+                # accounts for a totally blank file
+                with open("./data/systems.txt", "r") as rfile:
+                    
+                    # read data
+                    content = rfile.read()
+                    
+                    # if there is no [ or ] in the data then it must be a blank file or this is the first entry
+                    # set toggle bool to True and set last index to be in between the brackets
+                    if "[" and "]" not in content:
+                        firstEntry = True
+                        lastIndexOf = 1
+
+                    # if there is already data in the file, find the last index of the } character
+                    # this character signifies the end of a dictionary and will be the next starting place to write at
+                    else:
+                        for i in range(len(content) - 1, -1, -1):
+                            if content[i] == "}":
+                                lastIndexOf = i+1
+                                break
+
+                    rfile.close()
+
+                # get the user's input for the new dictionary
+                userDataInput = ""
+                systemName = input(f"{Colors.B}{Colors.RED}NAME: {Colors.RESET}")
+                systemGalaxy = input(f"{Colors.B}{Colors.YELLOW}PARENT GALAXY: {Colors.RESET}")
+
+                # search the database for a parent galaxy with the name provided
+                try:
+
+                    for galaxy in dataList:
+                        
+                        # if it does not exist, create a new galaxy and place this system inside it
+                        if galaxy["name"].lower() != systemGalaxy.lower():
+
+                            # if this is the first entry, don't use a comma and a line break at the start
+                            # if it is not, use them
+                            if firstEntry:
+                                userDataInput = "    {\n        " + f'"name": "{systemGalaxy}",\n        "systems": [\n            "{systemName}"\n        ]\n    ' + "}"
+                            elif not firstEntry:
+                                userDataInput = ",\n    {\n        " + f'"name": "{systemGalaxy}",\n        "systems": [\n            "{systemName}"\n        ]\n    ' + "}"
+
+                            # open the file to write
+                            with open("./data/systems.txt", "w") as wfile:
+                    
+                                # if it's the first entry, put the user's data inside the brackets
+                                if firstEntry:
+                                    wfile.write("[\n" + userDataInput + "\n]")
+
+                                # if it is not, just insert the data
+                                elif not firstEntry:
+                                    wfile.write(content[:lastIndexOf] + userDataInput + content[lastIndexOf:])
+                                wfile.close()
+                        
+                        # if it does exist, place the system inside the entry
+                        # but add it through the database instead of directly to the file
+                        # use the text form of the dataList to print over the entire file
+                        elif galaxy["name"].lower() == systemGalaxy.lower():
+                            
+                            # remove the "NONE" filler if it's there by replacing it with the new system name
+                            if "NONE" in galaxy["systems"]:
+                                
+                                galaxy["systems"][0] = systemName
+                            
+                            # if it's not there, just append the new system
+                            elif "NONE" not in galaxy["systems"]:
+                                
+                                galaxy["systems"].append(systemName)
+
+                            # finally, make sure to rewrite the entire file so that it's included in it
+                            # make sure to format the text version of the list so that it is readable upon inspection
+                            import json
+
+                            # write formatted text to file
+                            with open("./data/systems.txt", "w") as wfile:
+                                formattedDataList = json.dumps(dataList, indent=4)
+                                wfile.write(formattedDataList)
+                                wfile.close
+
+                except Exception as exception:
+                    pass
+                    # print(f"EXCEPTION THROWN: {exception}")
+
+                # update the database so it can be ready to read
+                update()
 
             case "x":
-                pass
+                
+                # local variables
+                lastIndexOf = 0
+                content = ""
+                firstEntry = False
+
+                # read the current data from the file and determine if this is the first entry or not
+                # accounts for a totally blank file
+                with open("./data/systems.txt", "r") as rfile:
+                    
+                    # read data
+                    content = rfile.read()
+                    
+                    # if there is no [ or ] in the data then it must be a blank file or this is the first entry
+                    # set toggle bool to True and set last index to be in between the brackets
+                    if "[" and "]" not in content:
+                        firstEntry = True
+                        lastIndexOf = 1
+
+                    # if there is already data in the file, find the last index of the } character
+                    # this character signifies the end of a dictionary and will be the next starting place to write at
+                    else:
+                        for i in range(len(content) - 1, -1, -1):
+                            if content[i] == "}":
+                                lastIndexOf = i+1
+                                break
+
+                    rfile.close()
+
+                # get the user's input for the new dictionary
+                userDataInput = ""
+                galaxyName = input(f"{Colors.B}{Colors.RED}NAME: {Colors.RESET}")
+                galaxySystems = []
+
+                while True:
+
+                    # if the user knows or wants to input any systems inside the galaxy, start loop to get data
+                    isParent = input(f"{Colors.B}{Colors.CYAN}Would you like to input any systems inside this galaxy? (y / n): {Colors.RESET}")
+
+                    # if yes, start loop
+                    if isParent.lower() == "y":
+
+                        while True:
+                            
+                            # ask for system name and append it to the list
+                            galaxySystem = input(f"{Colors.B}{Colors.YELLOW}SYSTEM NAME: {Colors.RESET}")
+                            galaxySystems.append(galaxySystem)
+
+                            # ask to add in another
+                            anotherChild = input(f"{Colors.B}{Colors.CYAN}Input Another? (y / n): {Colors.RESET}")
+
+                            # if yes, continue
+                            if anotherChild.lower() == "y":
+                                pass
+
+                            # if no, break
+                            elif anotherChild.lower() == "n":
+                                break
+
+                            # if wrong input, repeat and tell
+                            else:
+                                print(f"{Colors.BLACK}{Colors.REDB}\n!- INVALID CHOICE. PLEASE TRY AGAIN. -!{Colors.RESET}\n")
+
+                        break
+
+                    # if no, fill in as blank and continue
+                    elif isParent.lower() == "n":
+                        galaxySystems.append("NONE")
+                        break
+
+                    # if wrong input, repeat and tell
+                    else:
+                        print(f"{Colors.BLACK}{Colors.REDB}\n!- INVALID CHOICE. PLEASE TRY AGAIN. -!{Colors.RESET}\n")
+                
+                # add the systems to the userDataInput
+                systemDataInput = '"systems": [\n            '
+                for i in range(len(galaxySystems)):
+                    
+                    # if it's not the last item, use the comma
+                    if i != (len(galaxySystems) - 1):
+                        systemDataInput = systemDataInput + f'"{galaxySystems[i]}",\n            '
+
+                    # if it is, don't use the comma (using it will disrupt the read function of the app)
+                    # and make sure to include the last brackets
+                    elif i == (len(galaxySystems) - 1):
+                        systemDataInput = systemDataInput + f'"{galaxySystems[i]}"\n        ]\n    ' + "}"
+
+                # if this is the first entry, don't use a comma and a line break at the start
+                # if it is not, use them
+                if firstEntry:
+                    userDataInput = "    {\n        " + f'"name": "{galaxyName}",\n        ' + systemDataInput
+                elif not firstEntry:
+                    userDataInput = ",\n    {\n        " + f'"name": "{galaxyName}",\n        ' + systemDataInput
+
+                # open the file to write
+                with open("./data/systems.txt", "w") as wfile:
+                    
+                    # if it's the first entry, put the user's data inside the brackets
+                    if firstEntry:
+                        wfile.write("[\n" + userDataInput + "\n]")
+                    
+                    # if it is not, just insert the data
+                    elif not firstEntry:
+                        wfile.write(content[:lastIndexOf] + userDataInput + content[lastIndexOf:])
+                    wfile.close()
+
+                # update the database so it can be ready to read
+                update()
     
     # currently this is only just copy & pasted code from "rData" because the code for searching data will probably be used again
     def cData(dataList, mthd, qry):
@@ -586,7 +785,7 @@ def runSearch(category, method, mode="r"):
         # after the function decided above is finished executing, ask if the user wishes to query another value
         while True:
             
-            qagain = input(f"{Colors.CYAN}{Colors.B}Would you like to query again? (y / n){Colors.RESET}: ")
+            qagain = input(f"{Colors.CYAN}{Colors.B}Would you like to input another entry? (y / n){Colors.RESET}: ")
             
             # if yes, run the search again with the same parameters and break the loop
             # if no, just break the loop
