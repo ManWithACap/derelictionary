@@ -290,7 +290,7 @@ def runSearch(category, method, mode="r"):
                 userDataInput = ""
                 outpostName = input(f"{Colors.B}{Colors.RED}NAME: {Colors.RESET}")
                 outpostSystem = input(f"{Colors.B}{Colors.YELLOW}SYSTEM: {Colors.RESET}")
-                outpostGalaxy = input(f"{Colors.B}{Colors.GREEN}Galaxy: {Colors.RESET}")
+                outpostGalaxy = input(f"{Colors.B}{Colors.GREEN}GALAXY: {Colors.RESET}")
                 outpostType = input(f"{Colors.B}{Colors.BLUE}TYPE: {Colors.RESET}")
                 
                 # if this is the first entry, don't use a comma and a line break at the start
@@ -316,7 +316,65 @@ def runSearch(category, method, mode="r"):
                 update()
 
             case "g":
-                pass
+                
+                # local variables
+                lastIndexOf = 0
+                content = ""
+                firstEntry = False
+
+                # read the current data from the file and determine if this is the first entry or not
+                # accounts for a totally blank file
+                with open("./data/stargates.txt", "r") as rfile:
+                    
+                    # read data
+                    content = rfile.read()
+                    
+                    # if there is no [ or ] in the data then it must be a blank file or this is the first entry
+                    # set toggle bool to True and set last index to be in between the brackets
+                    if "[" and "]" not in content:
+                        firstEntry = True
+                        lastIndexOf = 1
+
+                    # if there is already data in the file, find the last index of the } character
+                    # this character signifies the end of a dictionary and will be the next starting place to write at
+                    else:
+                        for i in range(len(content) - 1, -1, -1):
+                            if content[i] == "}":
+                                lastIndexOf = i+1
+                                break
+
+                    rfile.close()
+
+                # get the user's input for the new dictionary
+                userDataInput = ""
+                stargateID = input(f"{Colors.B}{Colors.RED}ID: {Colors.RESET}")
+                stargateSystem = input(f"{Colors.B}{Colors.YELLOW}SYSTEM: {Colors.RESET}")
+                stargateGalaxy = input(f"{Colors.B}{Colors.GREEN}GALAXY: {Colors.RESET}")
+                stargateOutputSystem = input(f"{Colors.B}{Colors.BLUE}OUTPUT SYSTEM: {Colors.RESET}")
+                stargateOutputGalaxy = input(f"{Colors.B}{Colors.PURPLE}OUTPUT GALAXY: {Colors.RESET}")
+                
+                # if this is the first entry, don't use a comma and a line break at the start
+                # if it is not, use them
+                if firstEntry:
+                    userDataInput = "    {\n        " + f'"id": "{stargateID}",\n        ' + f'"system": "{stargateSystem}",\n        ' + f'"galaxy": "{stargateGalaxy}",\n        ' + '"output": {\n            ' + f'"system": "{stargateOutputSystem}",\n            "galaxy": "{stargateOutputGalaxy}"\n        ' + "}\n    }"        
+                elif not firstEntry:
+                    userDataInput = ",\n    {\n        " + f'"id": "{stargateID}",\n        ' + f'"system": "{stargateSystem}",\n        ' + f'"galaxy": "{stargateGalaxy}",\n        ' + '"output": {\n            ' + f'"system": "{stargateOutputSystem}",\n            "galaxy": "{stargateOutputGalaxy}"\n        ' + "}\n    }"
+                
+                # open the file to write
+                with open("./data/stargates.txt", "w") as wfile:
+                    
+                    # if it's the first entry, put the user's data inside the brackets
+                    if firstEntry:
+                        wfile.write("[\n" + userDataInput + "\n]")
+                    
+                    # if it is not, just insert the data
+                    elif not firstEntry:
+                        wfile.write(content[:lastIndexOf] + userDataInput + content[lastIndexOf:])
+                    wfile.close()
+
+                # update the database so it can be ready to read
+                update()
+
 
             case "t":
                 pass
