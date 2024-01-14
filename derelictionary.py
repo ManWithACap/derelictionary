@@ -240,7 +240,7 @@ def runSearch(category, method, mode="r"):
             print(f"{Colors.BLACK}{Colors.REDB}!! NONE !!{Colors.RESET}")
     
     # used to write data to the "database"
-    def wData(dataList, mthd, qry):
+    def wData(dataList, mthd):
         """
         A nested function responsible for actually searching out data and reporting it back to the user
 
@@ -249,32 +249,71 @@ def runSearch(category, method, mode="r"):
         - mthd (string): the method in which to search in dataList
         - qry (string): the string value to be searched
         """
+        
         # colors! :D
-        print(f"\n{Colors.B}{Colors.U}{Colors.CYAN}FOUND:{Colors.RESET}")
+        print(f"\n{Colors.B}{Colors.U}{Colors.CYAN}DATA INPUT REQUIRED:{Colors.RESET}")
         
         # using the mthd variable, use the correct process to write in data
         match mthd:
             
             case "o":
 
+                # local variables
                 lastIndexOf = 0
                 content = ""
+                firstEntry = False
 
+                # read the current data from the file and determine if this is the first entry or not
+                # accounts for a totally blank file
                 with open("./data/outposts.txt", "r") as rfile:
                     
+                    # read data
                     content = rfile.read()
+                    
+                    # if there is no [ or ] in the data then it must be a blank file or this is the first entry
+                    # set toggle bool to True and set last index to be in between the brackets
+                    if "[" and "]" not in content:
+                        firstEntry = True
+                        lastIndexOf = 1
 
-                    for i in range(len(content) - 1, -1, -1):
+                    # if there is already data in the file, find the last index of the } character
+                    # this character signifies the end of a dictionary and will be the next starting place to write at
+                    else:
+                        for i in range(len(content) - 1, -1, -1):
+                            if content[i] == "}":
+                                lastIndexOf = i+1
+                                break
 
-                        if content[i] == "}":
-                            lastIndexOf = i+1
-                            print(f"{i}, '{content[len(content)-1]}'")
-                            break
                     rfile.close()
 
+                # get the user's input for the new dictionary
+                userDataInput = ""
+                outpostName = input(f"{Colors.B}{Colors.RED}NAME: {Colors.RESET}")
+                outpostSystem = input(f"{Colors.B}{Colors.YELLOW}SYSTEM: {Colors.RESET}")
+                outpostGalaxy = input(f"{Colors.B}{Colors.GREEN}Galaxy: {Colors.RESET}")
+                outpostType = input(f"{Colors.B}{Colors.BLUE}TYPE: {Colors.RESET}")
+                
+                # if this is the first entry, don't use a comma and a line break at the start
+                # if it is not, use them
+                if firstEntry:
+                    userDataInput = "    {\n        " + f'"name": "{outpostName}",\n        ' + f'"system": "{outpostSystem}",\n        ' + f'"galaxy": "{outpostGalaxy}",\n        ' + f'"type": "{outpostType}"\n    ' + "}"
+                elif not firstEntry:
+                    userDataInput = ",\n    {\n        " + f'"name": "{outpostName}",\n        ' + f'"system": "{outpostSystem}",\n        ' + f'"galaxy": "{outpostGalaxy}",\n        ' + f'"type": "{outpostType}"\n    ' + "}"
+                
+                # open the file to write
                 with open("./data/outposts.txt", "w") as wfile:
-                    wfile.write(content[:lastIndexOf] + ",\n    blahblahblah" + content[lastIndexOf:])
+                    
+                    # if it's the first entry, put the user's data inside the brackets
+                    if firstEntry:
+                        wfile.write("[\n" + userDataInput + "\n]")
+                    
+                    # if it is not, just insert the data
+                    elif not firstEntry:
+                        wfile.write(content[:lastIndexOf] + userDataInput + content[lastIndexOf:])
                     wfile.close()
+
+                # update the database so it can be ready to read
+                update()
 
             case "g":
                 pass
@@ -412,27 +451,24 @@ def runSearch(category, method, mode="r"):
     # WRITING MODE 
     if mode == "w":
 
-        # ask for query to search for
-        query = input(f"\n{Colors.YELLOW}{Colors.B}Input Query{Colors.RESET}: ")
-
         # pass a different corresponding data list variable depending on the category chosen
         # fyi: vars.systems is used for both the "GALAXIES" category case AND the "SYSTEMS" category case
         # because BOTH desired search return data choices are found in the same file and therefore in the same data list
         match category:
             case "OUTPOSTS":
-                wData(vars.outposts, method, query)
+                wData(vars.outposts, method)
 
             case "STARGATES":
-                wData(vars.stargates, method, query)
+                wData(vars.stargates, method)
 
             case "TRADING POSTS":
-                wData(vars.tradingPosts, method, query)
+                wData(vars.tradingPosts, method)
 
             case "GALAXIES":
-                wData(vars.systems, method, query)
+                wData(vars.systems, method)
 
             case "SYSTEMS":
-                wData(vars.systems, method, query)
+                wData(vars.systems, method)
 
 
         # after the function decided above is finished executing, ask if the user wishes to query another value
