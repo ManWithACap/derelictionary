@@ -25,7 +25,7 @@ This app is developed by only myself with much love for the great game that is D
 Since *Derelictionary* is a **command-based** application, you'll need to follow the prompts on screen like the ones below in order to use it correctly.
 There are **3** functions to *Derelicitonary* currently.
 > 🟢 **Read Data**<br>
-> 🔴 **Write Data**<br>
+> 🟡 **Write Data**<br>
 > 🔴 **Clear Data**
 
 ### Following The Prompts
